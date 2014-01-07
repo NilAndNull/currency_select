@@ -18,17 +18,17 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".document",
-     ".gitignore",
-     "Gemfile",
-     "LICENSE",
-     "README.rdoc",
-     "Rakefile",
-     "VERSION",
-     "currency_select.gemspec",
-     "lib/currency_select.rb",
-     "rails/init.rb",
-     "test/helper.rb",
-     "test/test_currency_select.rb"
+    ".gitignore",
+    "Gemfile",
+    "LICENSE",
+    "README.rdoc",
+    "Rakefile",
+    "VERSION",
+    "currency_select.gemspec",
+    "lib/currency_select.rb",
+    "rails/init.rb",
+    "spec/currency_select_spec.rb",
+    "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/tanordheim/currency_select}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -36,8 +36,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.7.2}
   s.summary = %q{Currency Select plugin for Rails}
   s.test_files = [
-    "test/helper.rb",
-     "test/test_currency_select.rb"
+    "spec/currency_select_spec.rb",
+    "spec/spec_helper.rb"
   ]
 
   s.add_development_dependency 'rspec'
