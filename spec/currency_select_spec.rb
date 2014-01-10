@@ -1,11 +1,44 @@
 require 'spec_helper'
 require 'action_view'
 require 'currency_select'
+require 'money'
+
+describe CurrencySelect do
+  describe "currency_array" do
+    context "currency_list is provided" do
+      before :each do 
+        CurrencySelect.currency_list = [["Foo", :bar]] 
+      end
+
+      it "should not hit require" do
+        CurrencySelect.should_not_receive(:require)
+        CurrencySelect.currencies_array
+      end
+
+      it "should render the currency_list" do
+        CurrencySelect.currencies_array.should == [["Foo", :bar]]
+      end
+    end
+
+    context "currency_list is not provided" do
+      before :each do 
+        CurrencySelect.currency_list = nil
+      end
+      
+      it "should return the Money::Currency table" do
+        CurrencySelect.currencies_array.count.should == Money::Currency.table.count
+      end
+    end
+  end
+end
 
 module ActionView
   module Helpers
-
     describe CurrencySelect do
+      before :each do 
+        CurrencySelect.currency_list = nil
+      end
+
       include TagHelper
 
       class User

@@ -26,9 +26,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "currency_select.gemspec",
      "lib/currency_select.rb",
-     "rails/init.rb",
-     "test/helper.rb",
-     "test/test_currency_select.rb"
+     "rails/init.rb"
   ]
   s.homepage = %q{http://github.com/tanordheim/currency_select}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -36,12 +34,14 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.7.2}
   s.summary = %q{Currency Select plugin for Rails}
   s.test_files = [
-    "test/helper.rb",
-     "test/test_currency_select.rb"
+    "spec/spec_helper.rb",
+     "spec/currency_select_spec.rb"
   ]
 
   s.add_development_dependency 'rspec'
-
+  s.add_development_dependency 'rake'
+  
+  s.add_dependency("actionview")
   if s.respond_to? :specification_version then
     s.specification_version = 3
 

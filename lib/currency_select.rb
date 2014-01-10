@@ -1,16 +1,21 @@
-require "money"
 
 module CurrencySelect
   class << self
-
-    CURRENCIES = Money::Currency::table.inject([]) do |array, (id, currency)|
-      array << [ "#{currency[:name]} - #{currency[:iso_code]}", id ]
-    end.sort_by { |currency| currency.first } unless const_defined?("CURRENCIES")
+    attr_accessor :currency_list
 
     # Returns an array with ISO codes and currency names for <tt>option</tt>
     # tags.
     def currencies_array
-      CURRENCIES
+      if @currency_list
+        @currency_list
+      else
+        @currencies ||= begin
+          require 'money'
+          Money::Currency::table.inject([]) do |array, (id, currency)|
+            array << [ "#{currency[:name]} - #{currency[:iso_code]}", id ]
+          end.sort_by { |currency| currency.first }
+        end
+      end
     end
 
     # Return an array with ISO codes and currency names for currency ISO codes
@@ -34,9 +39,9 @@ module ActionView
       # currency_options_for_select to generate the list of option tags.
       def currency_select(object, method, priority_currencies = nil, options = {}, html_options = {})
         tag = if defined?(ActionView::Helpers::InstanceTag) &&
-                 ActionView::Helpers::InstanceTag.instance_method(:initialize).arity != 0
+                ActionView::Helpers::InstanceTag.instance_method(:initialize).arity != 0
 
-                 InstanceTag.new(object, method, self, options.delete(:object))
+          InstanceTag.new(object, method, self, options.delete(:object))
               else
                 CurrencySelectTag.new(object, method, self, options)
               end
@@ -77,7 +82,7 @@ module ActionView
     end
 
     if defined?(ActionView::Helpers::InstanceTag) &&
-        ActionView::Helpers::InstanceTag.instance_method(:initialize).arity != 0
+      ActionView::Helpers::InstanceTag.instance_method(:initialize).arity != 0
       class InstanceTag
         include ToCurrencySelectTag
       end
