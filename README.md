@@ -11,7 +11,7 @@ The list of currencies are provided by the [Money gem](http://money.rubyforge.or
 
 # re_selected_currency => form object method returning an array with the pre_selected_corrency: ['usd']
 # filter_currencies => array containing the currencies you dont want: ['btn']
-# prirority_currencies => array containing the currencies showing at the top: ['']
+# prirority_currencies => array containing the currencies showing at the top: ['usd','eur','gbp']
 ```
 
 ```ruby
