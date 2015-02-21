@@ -30,7 +30,7 @@ module CurrencySelect
           end
 
           array
-        end.sort_by { |currency| currency.first }
+        end.sort_by { |currency| currency.first }.uniq{ |c| c.first }
       end
     end
 
