@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
      ".gitignore",
      "Gemfile",
      "LICENSE",
-     "README.rdoc",
+     "README.md",
      "Rakefile",
      "VERSION",
      "currency_select.gemspec",
