@@ -26,7 +26,7 @@ module CurrencySelect
                       filter_currencies.include?(currency[:iso_code].downcase))
 
           if ( !is_filter &&  !is_priority ) || (is_priority && !filter_priority_currencies)
-            array << [ "#{currency[:name]} - #{currency[:iso_code]}", id ]
+            array << [ "#{currency[:name]} - #{currency[:iso_code]}", id.upcase ]
           end
 
           array
@@ -40,7 +40,6 @@ module CurrencySelect
     #   priority_currencies_array([ "USD", "NOK" ])
     #   # => [ ['United States Dollar - USD', 'USD' ], ['Norwegian Kroner - NOK', 'NOK'] ]
     def priority_currencies_array(priority_currencies = [])
-
       priority_currencies.flat_map do |code|
         currencies_array(nil,priority_currencies,false).select do |currency|
           currency.last.to_s == code.downcase || currency.last.to_s == code.upcase
@@ -101,7 +100,7 @@ module ActionView
       def to_currency_select_tag(filter_currencies, priority_currencies, options, html_options)
         html_options = html_options.stringify_keys
         add_default_name_and_id(html_options)
-        selected = value(object)
+        selected = value(object).upcase
         content_tag('select', add_options(currency_options_for_select(selected, filter_currencies, priority_currencies), options, selected), html_options)
       end
     end

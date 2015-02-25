@@ -9,7 +9,7 @@ The list of currencies are provided by the [Money gem](http://money.rubyforge.or
 ```ruby
 # Parameters
 
-# re_selected_currency => form object method returning an array with the pre_selected_corrency: ['usd']
+# currency => model property with the pre-selected currency: ['usd']
 # filter_currencies => array containing the currencies you dont want: ['btn']
 # prirority_currencies => array containing the currencies showing at the top: ['usd','eur','gbp']
 ```
@@ -17,7 +17,7 @@ The list of currencies are provided by the [Money gem](http://money.rubyforge.or
 ```ruby
 # Usage
 
-<%= f.currency_select :pre_selected_currency, filter_currencies, prirority_currencies, hash_options, hash_html_options %>
+<%= f.currency_select :currency, filter_currencies, prirority_currencies, hash_options, hash_html_options %>
 ```
 
 ## Copyright
