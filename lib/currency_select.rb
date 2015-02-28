@@ -59,7 +59,6 @@ module ActionView
       # Return select and option tags for the given object and method, using
       # currency_options_for_select to generate the list of option tags.
       def currency_select(object, method, filter_currencies = nil, priority_currencies = nil, options = {}, html_options = {})
-
         tag = if defined?(ActionView::Helpers::InstanceTag) &&
                  ActionView::Helpers::InstanceTag.instance_method(:initialize).arity != 0
 
@@ -87,7 +86,7 @@ module ActionView
           # prevents selected from being included twice in the HTML which causes
           # some browsers to select the second selected option (not priority)
           # which makes it harder to select an alternative priority country
-          selected = nil if priority_currencies.include?(selected)
+          #selected = nil if priority_currencies.include?(selected)
         end
 
         opt = options_for_select(::CurrencySelect::currencies_array(filter_currencies, priority_currencies,true), selected)
@@ -100,7 +99,10 @@ module ActionView
       def to_currency_select_tag(filter_currencies, priority_currencies, options, html_options)
         html_options = html_options.stringify_keys
         add_default_name_and_id(html_options)
-        selected = value(object).upcase
+        
+        selected = options[:selected]
+        selected.upcase! unless selected.nil?
+
         content_tag('select', add_options(currency_options_for_select(selected, filter_currencies, priority_currencies), options, selected), html_options)
       end
     end
